@@ -1,13 +1,14 @@
 package com.spring.rest.spring_rest;
 
-import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestTestController {
 	
-	private List<String> dataList = new ArrayList<String>(Arrays.asList("Spring","Rest","SRC"));
-	private List<Data> allData= new ArrayList<Data>();
-	private List<Employee> allEmployeeData= new ArrayList<Employee>();
+	final private List<String> dataList = new ArrayList<String>(Arrays.asList("Spring","Rest","SRC"));
 	
-	@RequestMapping("/getData")
+	@Autowired
+	private JdbcTemplate jdbcTemplate; 
+	
+	@RequestMapping("/data/{id}")
 	public Data getData(@RequestParam(value="id", defaultValue="0") Integer id){
 		return new Data(id, dataList.get(id));
 	}
 	
-	@RequestMapping("/Data")
+	@RequestMapping("/data")
 	public List<Data> getAllData(){
+		List<Data> allData = new ArrayList<Data>();
+
 		allData.clear();
 		for (int i = 0; i < dataList.size(); i++) {
 			allData.add(new Data(i, dataList.get(i)));
@@ -33,9 +37,9 @@ public class RestTestController {
 		return allData;
 	}	
 	
-	@RequestMapping("/EmployeeData")
+	@RequestMapping("/employees")
 	public List<Employee> getAllEmplloyeeData(){	
-		allEmployeeData.clear();
+		List<Employee> allEmployeeData= new ArrayList<Employee>();
 		Connection c = null;
     	Statement stmt = null;
 	     try {
@@ -56,7 +60,8 @@ public class RestTestController {
 	         c.close();
 	      } catch ( Exception e ) {
 	         System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-	         System.exit(0);
+	         
+	         //System.exit(0);
 	      }
 		return allEmployeeData;
 	}
