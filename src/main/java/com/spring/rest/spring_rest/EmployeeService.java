@@ -3,7 +3,6 @@ package com.spring.rest.spring_rest;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +19,7 @@ public class EmployeeService {
 	}
 
 	public Employee getEmployee(int id) {
-		Query query = em.createNamedQuery(Employee.FIND_EMPLOYEE_BY_ID);
-	    query.setParameter("id", id);
-		return (Employee)query.getSingleResult();
+		Employee employee = em.find(Employee.class,id);
+		return employee;
 	}	
 }

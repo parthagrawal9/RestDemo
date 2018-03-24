@@ -5,15 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +25,7 @@ public class RestTestController {
 	private EmployeeService employeeService;
 
 	@RequestMapping("/data/{id}")
-	public Data getData(@RequestParam(value = "id", defaultValue = "0") Integer id) {
+	public Data getData(@PathVariable("id") Integer id) {
 		return new Data(id, dataList.get(id));
 	}
 
@@ -63,17 +59,11 @@ public class RestTestController {
 		return employeeService.getAllEmployees();
 	}
 	
-	@RequestMapping("/employeesJPA/{id}")
-	public Employee getEmplloyeeDataJPA(@RequestParam(value = "id", defaultValue = "0") Integer id) {
+	@RequestMapping("/employeeJPA/{id}")
+	public Employee getEmplloyee(@PathVariable("id") Integer id) {
+		System.out.println(id);
 		return employeeService.getEmployee(id);
 	}
-	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-//		employeeService.save(employee);
-//		//logger.debug("Added:: " + employee);
-//		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
-//	}
 }
 
 

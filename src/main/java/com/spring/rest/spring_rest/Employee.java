@@ -2,20 +2,18 @@ package com.spring.rest.spring_rest;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@Entity
-@NamedQueries({
-	@NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e"),
-    @NamedQuery(name=Employee.FIND_EMPLOYEE_BY_ID, query="select e from Employee e where e.id = :id")
-}) 
 
+//@NamedQueries({
+//	@NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e"),
+//    @NamedQuery(name = Employee.FIND_EMPLOYEE_BY_ID, query="select e from Employee e where e.id = :id")
+//}) 
+@Entity
+@NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e")
 public class Employee {
 
 	protected static final String FIND_ALL_EMPLOYEES = "find_all_employees";
-	protected static final String FIND_EMPLOYEE_BY_ID = "find_employee_by_id";
-	
 	
 	@Id
 	private int employeeId;
