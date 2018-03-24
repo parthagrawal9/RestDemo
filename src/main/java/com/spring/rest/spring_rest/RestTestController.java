@@ -63,6 +63,11 @@ public class RestTestController {
 		return employeeService.getAllEmployees();
 	}
 	
+	@RequestMapping("/employeesJPA/{id}")
+	public Employee getEmplloyeeDataJPA(@RequestParam(value = "id", defaultValue = "0") Integer id) {
+		return employeeService.getEmployee(id);
+	}
+	
 //	@RequestMapping(method = RequestMethod.POST)
 //	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
 //		employeeService.save(employee);
