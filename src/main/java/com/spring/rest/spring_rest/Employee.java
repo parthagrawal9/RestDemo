@@ -1,19 +1,31 @@
 package com.spring.rest.spring_rest;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e")
 public class Employee {
 
+	protected static final String FIND_ALL_EMPLOYEES = "find_all_employees";
+	
+	@Id
 	private int employeeId;
 	private String employeeName;
 	private int employeeAge;
 	private String employeeAddress;
-	private float employeeSalary;
+	private int employeeSalary;
 	
-	public Employee(int employeeId, String employeeName, int employeeAge, String employeeAddress, float employeeSalary) {
+	public Employee(int employeeId, String employeeName, int employeeAge,String employeeAddress, int employeeSalary) {
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
 		this.employeeAge = employeeAge;
 		this.employeeAddress = employeeAddress;
 		this.employeeSalary = employeeSalary;
+	}
+
+	public Employee() {
 	}
 
 	public int getEmployeeId() {
