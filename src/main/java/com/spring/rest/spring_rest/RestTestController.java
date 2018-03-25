@@ -68,12 +68,12 @@ public class RestTestController {
 	   return new ResponseEntity<Employee>(employeeService.getEmployee(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping("/delete/{id}")
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	public void deleteEmpById(@PathVariable("id")Integer id){
 		employeeService.deleteById(id);
 	}
 	
-	@RequestMapping("/addtest")
+	@RequestMapping(value="/addtest")
 	public void addEmp(){
 		employeeService.addEmployee(100, "Raghav", 10, "Raghav Address", 100000);
 	}
