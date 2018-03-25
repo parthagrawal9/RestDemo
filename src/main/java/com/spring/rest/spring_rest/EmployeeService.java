@@ -31,9 +31,9 @@ public class EmployeeService {
 	}
 	
 	public void deleteById(int id) {
-		em.getTransaction().begin();
+	//	em.getTransaction().begin();
 		em.remove(em.find(Employee.class,id));
-		em.getTransaction().commit();
+	//	em.getTransaction().commit();
 	}
 	
 	public void addEmployee(int employeeId, String employeeName, int employeeAge,String employeeAddress, int employeeSalary){
