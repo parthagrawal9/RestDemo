@@ -16,8 +16,8 @@ public class EmployeeService {
 	@PersistenceContext
 	EntityManager em;
 	
-//	@Autowired
-//	private EntityManagerFactory emf;
+	@Autowired
+	private EntityManagerFactory emf;
 	
 	public List<Employee> getAllEmployees() {
 		TypedQuery<Employee> query = em.createNamedQuery(Employee.FIND_ALL_EMPLOYEES, Employee.class);
@@ -31,9 +31,10 @@ public class EmployeeService {
 	}
 	
 	public void deleteById(int id) {
-	//	em.getTransaction().begin();
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		em.remove(em.find(Employee.class,id));
-	//	em.getTransaction().commit();
+		em.getTransaction().commit();
 	}
 	
 	public void addEmployee(int employeeId, String employeeName, int employeeAge,String employeeAddress, int employeeSalary){
@@ -43,7 +44,9 @@ public class EmployeeService {
 		e.setEmployeeAge(employeeAge);
 		e.setEmployeeAddress(employeeAddress);
 		e.setEmployeeSalary(employeeSalary);
-		//em = emf.createEntityManager();
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
 		em.persist(e);
+		em.getTransaction().commit();
 	}
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -69,13 +70,13 @@ public class RestTestController {
 	}
 	
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
-	public void deleteEmpById(@PathVariable("id")Integer id){
+	public @ResponseBody void deleteEmpById(@PathVariable("id")Integer id){
 		employeeService.deleteById(id);
 	}
 	
-	@RequestMapping(value="/addtest")
+	@RequestMapping(value="/addtest", method=RequestMethod.POST)
 	public void addEmp(){
-		employeeService.addEmployee(100, "Raghav", 10, "Raghav Address", 100000);
+		employeeService.addEmployee(90, "Raghav", 90, "Raghav Address", 900000);
 	}
 
 //	
