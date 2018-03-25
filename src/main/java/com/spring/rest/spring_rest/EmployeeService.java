@@ -21,5 +21,19 @@ public class EmployeeService {
 	public Employee getEmployee(int id) {
 		Employee employee = em.find(Employee.class,id);
 		return employee;
-	}	
+	}
+	
+	public void deleteById(int id) {
+		em.remove(em.find(Employee.class,id));
+	}
+	
+	public void addEmployee(int employeeId, String employeeName, int employeeAge,String employeeAddress, int employeeSalary){
+		Employee e = new Employee();
+		e.setEmployeeId(employeeId);
+		e.setEmployeeName(employeeName);
+		e.setEmployeeAge(employeeAge);
+		e.setEmployeeAddress(employeeAddress);
+		e.setEmployeeSalary(employeeSalary);
+		em.persist(e);
+	}
 }
