@@ -44,39 +44,25 @@ public class RestTestController {
 	}
 
 	@RequestMapping("/employees")
-	public List<Employee> getAllEmplloyeeData() {
-		return jdbcTemplate.query("SELECT * FROM COMPANY", new RowMapper<Employee>() {
-			@Override
-			public Employee mapRow(ResultSet rs, int arg1) throws SQLException {
-				Employee employee = new Employee();
-				employee.setEmployeeId(rs.getInt("id"));
-				employee.setEmployeeName(rs.getString("name"));
-				employee.setEmployeeAge(rs.getInt("age"));
-				employee.setEmployeeAddress(rs.getString("address").trim());
-				employee.setEmployeeSalary(rs.getInt("salary"));
-				return employee;
-			}
-		});
-	}
-
-	@RequestMapping("/employeesJPA")
 	public List<Employee> getAllEmplloyeeDataJPA() {
 		return employeeService.getAllEmployees();
 	}
 	
-	@RequestMapping("/employeeJPA/{id}")
+	@RequestMapping("/employees/{id}")
 	public ResponseEntity<Employee> get(@PathVariable("id") Integer id) {
 	   return new ResponseEntity<Employee>(employeeService.getEmployee(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody void deleteEmpById(@PathVariable("id")Integer id){
-		employeeService.deleteById(id);
+	@RequestMapping(value="/employees/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<StandardResponse> deleteEmpById(@PathVariable("id")Integer id){
+		employeeService.deleteEmployee(id);
+		return new ResponseEntity<StandardResponse>(new StandardResponse("OK"),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/addtest", method=RequestMethod.POST)
-	public void addEmp(){
-		employeeService.addEmployee(90, "Raghav", 90, "Raghav Address", 900000);
+	@RequestMapping(value="/employees", method=RequestMethod.POST)
+	public ResponseEntity<StandardResponse> addEmp(@RequestBody(required=true) Employee emp){
+		employeeService.addEmployee(emp);
+		return new ResponseEntity<StandardResponse>(new StandardResponse("OK"),HttpStatus.OK);
 	}
 
 //	
