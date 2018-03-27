@@ -33,4 +33,10 @@ public class EmployeeService {
 	public void addEmployee(Employee e) {
 		em.persist(e);
 	}
+	
+	@Transactional
+	public void updateEmployee(Employee e){
+		em.merge(e);
+	}
+	
 }

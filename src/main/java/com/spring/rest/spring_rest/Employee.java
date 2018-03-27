@@ -4,11 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-//@NamedQueries({
-//	@NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e"),
-//  @NamedQuery(name = Employee.FIND_EMPLOYEE_BY_ID, query="select e from Employee e where e.id = :id")
-//}) 
-
 @Entity
 @NamedQuery(name = Employee.FIND_ALL_EMPLOYEES, query = "select e from Employee e")
 public class Employee {
