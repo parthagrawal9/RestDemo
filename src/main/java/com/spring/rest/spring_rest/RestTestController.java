@@ -20,6 +20,11 @@ public class RestTestController {
 	@Autowired
 	private EmployeeService employeeService;
 
+    @RequestMapping("/health")
+    public String getHealth() {
+	    return "OK";
+    }
+
 	@RequestMapping("/data/{id}")
 	public Data getData(@PathVariable("id") Integer id) {
 		return new Data(id, dataList.get(id));
